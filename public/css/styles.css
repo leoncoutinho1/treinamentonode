@@ -1,0 +1,46 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+main {
+    padding: 1.5rem;
+}
+
+.main-header {
+    width: 100%;
+    height: 3.5rem;
+    background-color: darkgreen;
+    padding: 0 1.5rem;
+}
+
+.main-header nav {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.item-list {
+     margin: 0 1rem;
+     padding: 0;
+}
+
+.item-list a {
+    text-decoration: none;
+    display: flex;
+    color: white;
+}
+
+.item-list a:hover,
+.item-list a:active,
+.item-list a.active {
+    color: #b993ff;
+}
