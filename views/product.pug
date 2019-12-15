@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible" content="ie=edge")
+        link(rel="stylesheet", href="/css/styles.css")
+    body
+        header.main-header
+            nav
+                ul.list
+                    li.item-list
+                        a.active(href="/") Shop
+                    li.item-list
+                        a(href="/add-product") Add Product
+        main
+            //- uma div (implicito) com classe grid
+            .grid
+                each product in prods
+                    article.card.product-item
+                        header.card-header
+                            h1.product-title #{product.title}
+                    .card-content
+                        h2.product-price #{product.price}
+                    p.product-description 
+                    .card-actions
+                        button.btn Add to chart

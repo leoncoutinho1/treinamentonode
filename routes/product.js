@@ -11,8 +11,8 @@ routes.get('/add-product', (req,res,next) => {
 });
 
 routes.post('/product', (req, res, next) => {
-    console.log(req.body.title);                //recupera o title digitado no form pelo body da request
-    res.redirect('/');
+    products.push({ title: req.body.title, price: req.body.price});   //recupera os dados digitados no form pelo body da request
+    res.redirect('/'); 
 });
 
 exports.routes = routes;
