@@ -2,15 +2,18 @@ const express = require('express');
 
 const path = require('path');
 
-const router = express.Router();
+const products = [];
 
-router.get('/add-product', (req,res,next) => {
+const routes = express.Router();
+
+routes.get('/add-product', (req,res,next) => {
     res.sendFile(path.join(__dirname, '../', 'views', 'add-product.html'));
 });
 
-router.post('/product', (req, res, next) => {
+routes.post('/product', (req, res, next) => {
     console.log(req.body.title);                //recupera o title digitado no form pelo body da request
     res.redirect('/');
 });
 
-module.exports = router;
+exports.routes = routes;
+exports.products = products;

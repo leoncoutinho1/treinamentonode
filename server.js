@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: false }));  //{ extended: false } func
 app.use(express.static(path.join(__dirname, 'public'))); //liberando acesso à pasta public
 
 //utilizando o router
-const productRoutes = require('./routes/product');
+const productData = require('./routes/product');
 const pageRoutes = require('./routes/page');
 
 //ação que acontecerá em qualquer chamada
@@ -21,7 +21,7 @@ app.use('/', (req, res, next) => {
     next();
 });
 
-app.use(productRoutes);
+app.use(productData.routes);
 app.use(pageRoutes);
 
 //ação que ocorrerá apenas se nenhuma página for encontrada
