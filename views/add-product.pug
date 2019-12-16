@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet", href="/css/styles.css")
+        title #{title}
+    body
+        header.main-header
+            nav
+                ul.list
+                    li.item-list
+                        a(href="/") Shop
+                    li.item-list
+                        a.active(href="/add-product") Add Product
+    main
+        form(action="/product", method="POST")
+            .form-control
+            label(for="title") Title
+            input(type="text", name="title")#title
+            label(for="price") Price
+            input(type="text", name="price")#price
+            button.btn(type="submit") Add product
