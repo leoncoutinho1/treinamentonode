@@ -31,7 +31,10 @@ app.use(pageRoutes);
 
 //ação que ocorrerá apenas se nenhuma página for encontrada
 app.use((req, res, next) => {
-    res.status(404).sendFile(path.join(__dirname, 'views', 'notFound.html'));
+    res.status(404).render('notFound');
+
+    //chamada da pagina estática
+    //res.status(404).sendFile(path.join(__dirname, 'views', 'notFound.html'));
 });
 
 app.listen(3000, () => {

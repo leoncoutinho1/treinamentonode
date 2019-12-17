@@ -44,3 +44,18 @@ main {
 .item-list a.active {
     color: #b993ff;
 }
+
+.form form {
+    width: 300px;
+    height: 300px;
+    border-color: darkgrey;
+    border-radius: 2px;
+    border-style: solid;
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center
+}
