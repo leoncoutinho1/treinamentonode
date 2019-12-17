@@ -15,13 +15,16 @@ html(lang="en")
                         a(href="/add-product") Add Product
         main
             //- uma div (implicito) com classe grid
-            .grid
-                each product in prods
-                    article.card.product-item
-                        header.card-header
-                            h1.product-title #{product.title}
-                    .card-content
-                        h2.product-price #{product.price}
-                    p.product-description 
-                    .card-actions
-                        button.btn Add to chart
+            if prods.length > 0
+                .grid
+                    each product in prods
+                        article.card.product-item
+                            header.card-header
+                                h1.product-title #{product.title}
+                        .card-content
+                            h2.product-price #{product.price}
+                        p.product-description 
+                        .card-actions
+                            button.btn Add to chart
+            else
+                h1 No products
