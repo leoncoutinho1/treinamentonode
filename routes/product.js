@@ -7,7 +7,10 @@ const products = [];
 const routes = express.Router();
 
 routes.get('/add-product', (req,res,next) => {
-    res.render('add-product', { title: 'Add Product'});
+    //renderização com handlebars
+    res.render('add-product', { pageTitle: 'Add Product', activeAddProduct: true});
+    //renderização com pug
+    //res.render('add-product', { pageTitle: 'Add Product', path:'/add-product'});
     // código para pagina estatica
     //res.sendFile(path.join(__dirname, '../', 'views', 'add-product.html'));
 });

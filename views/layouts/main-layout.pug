@@ -11,7 +11,7 @@ html(lang="en")
             nav
                 ul.list
                     li.item-list
-                        a(href="/") Shop
+                        a(href="/", class=(path === '/' ? 'active' : '')) Shop
                     li.item-list
-                        a(href="/add-product") Add Product
+                        a(href="/add-product", class=(path === '/add-product' ? 'active' : '')) Add Product
         block content

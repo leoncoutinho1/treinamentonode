@@ -45,17 +45,104 @@ main {
     color: #b993ff;
 }
 
+.form {
+    height: 280px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 .form form {
     width: 300px;
     height: 300px;
     border-color: darkgrey;
     border-radius: 2px;
     border-style: solid;
+    justify-content: center;
+    display: flex;
 }
 
-.form {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center
+.form form input {
+    display: block;
+
 }
+
+.form form btn {
+    display: block;
+}
+
+.product-title {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.product-price {
+    text-align: center;
+    color: #4d4d4d;
+    margin-bottom: 0.5rem;
+}
+
+.product-description {
+    text-align: center;
+}
+
+.product-form {
+    width: 20rem;
+    max-width: 90%;
+    margin: auto;
+}
+
+.product-item {
+    width: 20rem;
+    max-width: 95%;
+}
+
+.card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  }
+  
+  .card_header,
+  .card_content {
+    padding: 1rem;
+  }
+  
+  .card-header h1,
+  .card-content h1,
+  .card-content h2,
+  .card-content p {
+    margin: 0;
+  }
+  
+  .card-image {
+    width: 100%;
+  }
+  
+  .card-image img {
+    width: 100%;
+  }
+  
+  .card-actions {
+      padding: 1rem;
+      text-align: center;
+  }
+  
+  .card-actions button,
+  .card-actions a {
+      margin: 0 0.25rem;
+  }
+  
+  .btn {
+    font: inherit;
+    border: 1px solid #00695c;
+    color: #00695c;
+    background: white;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .btn:hover,
+  .btn:active {
+    background-color: #00695c;
+    color: white;
+  }
