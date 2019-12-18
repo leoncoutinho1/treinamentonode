@@ -6,7 +6,7 @@ const path = require('path');
 //adicionando body-parser para trabalhar com o req.body
 const bodyParser = require('body-parser');
 //importando handlebars
-const expressHbs = require('express-handlebars');
+//const expressHbs = require('express-handlebars');
 
 app.use(bodyParser.urlencoded({ extended: false }));  //{ extended: false } funcionou sem mais apresentou uma mensagem de body-parser deprecated
 app.use(express.static(path.join(__dirname, 'public'))); //liberando acesso à pasta public
@@ -31,7 +31,7 @@ app.set('view engine', 'hbs');
 app.set('views', 'views');
 
 //utilizando o router
-const productData = require('./routes/product');
+const routes = require('./routes/product');
 const pageRoutes = require('./routes/page');
 
 //ação que acontecerá em qualquer chamada
@@ -43,7 +43,7 @@ app.use('/', (req, res, next) => {
     next();
 });
 
-app.use(productData.routes);
+app.use(routes);
 app.use(pageRoutes);
 
 //ação que ocorrerá apenas se nenhuma página for encontrada
