@@ -8,9 +8,9 @@ const routes = express.Router();
 
 routes.get('/add-product', (req,res,next) => {
     //renderização com handlebars
-    res.render('add-product', { pageTitle: 'Add Product', activeAddProduct: true});
-    //renderização com pug
-    //res.render('add-product', { pageTitle: 'Add Product', path:'/add-product'});
+    //res.render('add-product', { pageTitle: 'Add Product', activeAddProduct: true});
+    //renderização com pug e ejs
+    res.render('add-product', { pageTitle: 'Add Product', path:'/add-product'});
     // código para pagina estatica
     //res.sendFile(path.join(__dirname, '../', 'views', 'add-product.html'));
 });

@@ -12,18 +12,23 @@
         <nav class="nav">
             <ul class="list">
                 <li class="item-list"><a href="/">Shop</a></li>
-            <li class="item-list"><a class="active" href="/add-product">Add product</a></li class="item-list">
+            <li class="item-list"><a class="active" href="/add-product">Add product</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <form action="/product" method="POST">
-            <label for="title">Title</label>
-            <input type="text" name="title"><br/>
-            <label for="price">Price</label>
-            <input type="text" name="price">
-            <button type="submit">Add product</button>
-        </form>
+        <div class="form">
+            <form action="/product" method="POST">
+                <div class="form-control">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title"><br/>
+                    <label for="price">Price</label>
+                    <input type="text" name="price" id="price">
+                    <button type="submit">Add product</button>
+                </div>
+                
+            </form>
+        </div>
     </main>
 </body>
 </html>

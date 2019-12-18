@@ -11,8 +11,11 @@ const expressHbs = require('express-handlebars');
 app.use(bodyParser.urlencoded({ extended: false }));  //{ extended: false } funcionou sem mais apresentou uma mensagem de body-parser deprecated
 app.use(express.static(path.join(__dirname, 'public'))); //liberando acesso à pasta public
 
+//habilitando para ejs
+app.set('view engine', 'ejs');
+
 //habilitando para handlebars
-app.engine(
+/* app.engine(
     'hbs', 
     expressHbs({
         layoutsDir: 'views/layouts/',
@@ -21,6 +24,7 @@ app.engine(
     })
 );
 app.set('view engine', 'hbs');
+*/
 
 //configurando pug para utilização de templates
 //app.set('view engine', 'pug');   //comentado enquanto uso handlebars
