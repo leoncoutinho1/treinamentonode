@@ -10,13 +10,13 @@
                     <% for (let product of prods) { %>
                         <article class="card product-item">
                             <header class="card-header">
-                                <h1 class="product-title">Great book</h1>
+                                <h1 class="product-title"><%= product.title%></h1>
                             </header>
                             <div class="card-image">
                                 <img src="https://images-na.ssl-images-amazon.com/images/I/51EstVXM1UL._SX331_BO1,204,203,200_.jpg">
                             </div>
                             <div class="card-content">
-                                <h2 class="product-price">$ 19.80</h2>
+                                <h2 class="product-price">$ <%= product.price %></h2>
                                 <p class="product-description"></p>
                             </div>
                             <div class="card-actions">
