@@ -33,17 +33,12 @@ app.set('views', 'views');
 //utilizando o router
 const productRoutes = require('./routes/product');
 const pageRoutes = require('./routes/page');
+const notFoundRoutes = require('./routes/notFound');
 
 app.use(pageRoutes);
 app.use(productRoutes);
+app.use(notFoundRoutes);
 
-//ação que ocorrerá apenas se nenhuma página for encontrada
-app.use((req, res, next) => {
-    res.status(404).render('notFound', { title: 'Page Not Found'});
-
-    //chamada da pagina estática
-    //res.status(404).sendFile(path.join(__dirname, 'views', 'notFound.html'));
-});
 
 app.listen(3000, () => {
     console.log('Escutando em localhost:3000');
