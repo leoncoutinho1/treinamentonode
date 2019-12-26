@@ -1,4 +1,3 @@
-const products = [];
 
 //para trabalhar com arquivos
 const fs = require('fs');
@@ -29,6 +28,7 @@ module.exports = class Product {
     }
 
     save() {
+        this.id = Math.random().toString();
         getProductsFromFile(products => {
             products.push(this);
             fs.writeFile(p, JSON.stringify(products), (err) => {
@@ -41,4 +41,12 @@ module.exports = class Product {
         //repassa a função de callback que recebeu para ser executada pela função getProductsFromFile
         getProductsFromFile(callback);
     }
+
+    static findById(id, callback) {
+        getProductsFromFile(products => {
+            const product = products.find(p => p.id === id);
+            callback(product);
+        });
+    }
+
 }

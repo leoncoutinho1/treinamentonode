@@ -35,6 +35,17 @@ exports.getProducts = (req, res, next) => {
     //  res.sendFile(path.join(__dirname,'../', 'views', 'product.html')); //path.join() concatena o caminho
 };
 
+exports.getProduct = (req, res, next) => {
+    const prodId = req.params.productId;
+    Product.findById(prodId, product => {
+        res.render('shop/product-detail', {
+            product: product,
+            pageTitle: product.title,
+            path: 'shop/products'
+        });
+    });
+};
+
 exports.getIndex = (req, res, next) => {
     Product.fetchAll(products => {
         res.render('shop/index', 
@@ -57,6 +68,13 @@ exports.getCart = (req, res, next) => {
     });
 };
 
+exports.postCart = (req, res, next) => {
+    const prodId = req.body.productId;
+    console.log(prodId);
+    res.redirect('/cart');
+
+}
+
 exports.getCheckout = (req, res, next) => {
     Product.fetchAll(products => {
         res.render('shop/checkout', 
@@ -65,4 +83,12 @@ exports.getCheckout = (req, res, next) => {
                         path: '/checkout' 
                     });
     });
+};
+
+exports.getOrders = (req, res, next) => {
+    res.render('shop/orders', 
+                { 
+                    pageTitle: 'Orders', 
+                    path: '/orders' 
+                });
 };

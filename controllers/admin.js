@@ -10,7 +10,7 @@ exports.logHour = (req, res, next) => {
 };
 
 exports.notFound = (req, res, next) => {
-    res.status(404).render('notFound', { pageTitle: 'Page Not Found', path: ''});
+    res.status(404).render('admin/notFound', { pageTitle: 'Page Not Found', path: ''});
 
     //chamada da pagina estática
     //res.status(404).sendFile(path.join(__dirname, 'views', 'notFound.html'));

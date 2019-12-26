@@ -1,1 +1,1 @@
-[{"title":"This is a test-product","price":"15","imageUrl":"https://http2.mlstatic.com/sherlock-holmes-o-cao-dos-baskervilles-D_NQ_NP_951113-MLB27925544275_082018-F.jpg","description":"This is just a test for input of a new product."}]
+[{"id": "12345", "title":"This is a test-product","price":"15","imageUrl":"https://http2.mlstatic.com/sherlock-holmes-o-cao-dos-baskervilles-D_NQ_NP_951113-MLB27925544275_082018-F.jpg","description":"This is just a test for input of a new product."}]
