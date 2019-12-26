@@ -31,8 +31,8 @@ app.set('view engine', 'hbs');
 app.set('views', 'views');
 
 //utilizando o router
-const productRoutes = require('./routes/product');
-const pageRoutes = require('./routes/page');
+const productRoutes = require('./routes/shop');
+const pageRoutes = require('./routes/admin');
 const notFoundRoutes = require('./routes/notFound');
 
 app.use(pageRoutes);

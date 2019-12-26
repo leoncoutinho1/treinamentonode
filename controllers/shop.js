@@ -1,26 +1,5 @@
 const Product = require('../models/product');
 
-exports.getAddProduct = (req,res,next) => {
-    //renderização com handlebars
-    //res.render('add-product', { pageTitle: 'Add Product', activeAddProduct: true});
-    //renderização com pug e ejs
-    res.render(
-        'add-product',
-        {
-            pageTitle: 'Add Product', 
-            path:'/add-product'
-        }
-    );
-    // código para pagina estatica
-    //res.sendFile(path.join(__dirname, '../', 'views', 'add-product.html'));
-};
-
-exports.postAddProduct = (req, res, next) => {
-    const product = new Product(req.body.title, req.body.price);   //recupera os dados digitados no form pelo body da request
-    product.save();
-    res.redirect('/'); 
-};
-
 exports.getProducts = (req, res, next) => {
     //recuperando a lista de produtos
     
@@ -44,14 +23,46 @@ exports.getProducts = (req, res, next) => {
     // a função de callback passando como parametro um array vazio ou
     // o array preenchido com os produtos que foram lidos do arquivo
     Product.fetchAll(products => {
-        res.render('product', 
+        res.render('shop/product-list', 
                     { 
                         prods: products,
-                        pageTitle: 'Produtos', 
-                        path: '/' 
+                        pageTitle: 'All Products', 
+                        path: '/products' 
                     });
         });
 
     // código para pagina estatica
     //  res.sendFile(path.join(__dirname,'../', 'views', 'product.html')); //path.join() concatena o caminho
-}; 
+};
+
+exports.getIndex = (req, res, next) => {
+    Product.fetchAll(products => {
+        res.render('shop/index', 
+                    { 
+                        prods: products,
+                        pageTitle: 'Shop', 
+                        path: '/' 
+                    });
+    });
+};
+
+
+exports.getCart = (req, res, next) => {
+    Product.fetchAll(products => {
+        res.render('shop/cart', 
+                    { 
+                        pageTitle: 'Your Cart', 
+                        path: '/cart' 
+                    });
+    });
+};
+
+exports.getCheckout = (req, res, next) => {
+    Product.fetchAll(products => {
+        res.render('shop/checkout', 
+                    { 
+                        pageTitle: 'Checkout', 
+                        path: '/checkout' 
+                    });
+    });
+};
