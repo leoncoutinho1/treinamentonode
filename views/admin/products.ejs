@@ -1,0 +1,35 @@
+<%- include('../includes/head.ejs') %>
+    </head>
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+        <main>
+            <% if (prods.length > 0) { %>
+                <div class="grid">
+                    <% for (let product of prods) { %>
+                        <article class="card product-item">
+                            <header class="card-header">
+                                <h1 class="product-title"><%= product.title%></h1>
+                            </header>
+                            <div class="card-image">
+                                <img src="<%= product.imageUrl %>">
+                            </div>
+                            <div class="card-content">
+                                <h2 class="product-price">$<%= product.price %></h2>
+                                <p class="product-description"><%= product.description %></p>
+                            </div>
+                            <div class="card-actions">
+                                <a href="/admin/edit-product" class="btn">Edit</a>
+                                <form action="/admin/delete=product" method="POST">
+                                    <button class="btn">Delete</button>
+                                </form>                                
+                            </div>
+                        </article>
+                    <% } %>
+                </div>
+            <% } else { %>
+                <div class="grid">
+                    <h2>Nenhum produto cadastrado.</h2>
+                </div>
+            <% } %>   
+        </main>
+<%- include('../includes/end.ejs') %>
