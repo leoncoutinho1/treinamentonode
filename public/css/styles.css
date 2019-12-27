@@ -150,6 +150,11 @@ img {
   .card-actions a {
       margin: 0 0.25rem;
   }
+
+  .card-actions a {
+    text-decoration: none;
+    padding: 0 0.5rem;
+  }
   
   .btn {
     font: inherit;
