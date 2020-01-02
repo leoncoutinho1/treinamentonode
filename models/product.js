@@ -4,6 +4,8 @@ const fs = require('fs');
 
 const path = require('path');
 
+const Cart = require('./cart');
+
 const p = path.join(__dirname, '/..', 'public', 'data', 'products.json');
 
 //função que recupera os dados do arquivo em formato JSON
@@ -44,6 +46,20 @@ module.exports = class Product {
                     console.log(err);
                 });
             }
+        });
+    }
+
+    static deleteById(id) {
+        getProductsFromFile(products => {
+            //encontra o produto selecionado
+            const product = products.find(prod => prod.id === id);
+            //lista todos os produtos exceto o que foi passado o id
+            const updatedProducts = products.filter(prod => prod.id !== id);
+            fs.writeFile(p, JSON.stringify(updatedProducts), err => {
+                if (!err) {
+                    Cart.deleteProduct(id, product.price);
+                }
+            });
         });
     }
 

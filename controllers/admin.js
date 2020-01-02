@@ -75,8 +75,14 @@ exports.postEditProduct = (req, res, next) => {
     const updatedDescription = req.body.description;
     const updatedProduct = new Product(prodId, updatedTitle, updatedPrice, updatedImageUrl, updatedDescription);   //recupera os dados digitados no form pelo body da request
     updatedProduct.save();
-    res.redirect('/'); 
+    res.redirect('/admin/products'); 
 };
+
+exports.postDeleteProduct = (req, res, next) => {
+    const prodId = req.body.productId;
+    Product.deleteById(prodId);
+    res.redirect('/admin/products');
+}
 
 exports.getProducts = (req, res, next) => {
     Product.fetchAll(products => {
