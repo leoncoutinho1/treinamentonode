@@ -8,6 +8,8 @@ const bodyParser = require('body-parser');
 //importando handlebars
 //const expressHbs = require('express-handlebars');
 
+const db = require('./utils/database');
+
 app.use(bodyParser.urlencoded({ extended: false }));  //{ extended: false } funcionou sem mas apresentou uma mensagem de body-parser deprecated
 app.use(express.static(path.join(__dirname, 'public'))); //liberando acesso à pasta public
 

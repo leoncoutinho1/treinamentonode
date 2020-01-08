@@ -1,3 +1,6 @@
+# arquivo com configurações de conexão ao bd
+utils/configConnection.js
+
 # Logs
 logs
 *.log
