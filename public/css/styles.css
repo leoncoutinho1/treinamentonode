@@ -20,7 +20,8 @@ main {
 }
 
 img {
-  height: 350px;
+  max-height: 35%;
+  max-width: 75%;
 }
 
 .main-header {
@@ -103,6 +104,7 @@ img {
 .product-item {
     width: 20rem;
     max-width: 95%;
+    text-align: center;
 }
 
 .product-title {
@@ -121,12 +123,15 @@ img {
 }
 
 .card {
+    margin: 5px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    text-align: center;
   }
   
   .card-header,
   .card-content {
     padding: 1rem;
+    text-align: center;
   }
   
   .card-header h1,
