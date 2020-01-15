@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 //importando handlebars
 //const expressHbs = require('express-handlebars');
 
-const db = require('./utils/database');
+const sequelize = require('./utils/database');
 
 app.use(bodyParser.urlencoded({ extended: false }));  //{ extended: false } funcionou sem mas apresentou uma mensagem de body-parser deprecated
 app.use(express.static(path.join(__dirname, 'public'))); //liberando acesso à pasta public
@@ -41,7 +41,13 @@ app.use(pageRoutes);
 app.use(productRoutes);
 app.use(notFoundRoutes);
 
-
-app.listen(3000, () => {
-    console.log('Escutando em localhost:3000');
-});
+//sincroniza o sequelize e se tiver sucesso inicia o server
+sequelize
+    .sync()
+    .then(result => {
+        //console.log(result);
+        app.listen(3000, () => {
+            console.log('Escutando em localhost:3000');
+        });
+    })
+    .catch(err => console.log(err));

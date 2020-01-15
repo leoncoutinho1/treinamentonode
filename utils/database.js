@@ -1,4 +1,6 @@
-const mysql = require('mysql2');
+
+//declarado com letra maiuscula e chaves pq o sequelize importa um constructor
+const { Sequelize } = require('sequelize');
 
 //buscando do arquivo utils/configConnection o objeto que será passado para o createPool
 // objeto com o seguinte formato:
@@ -12,7 +14,9 @@ const mysql = require('mysql2');
 */
 const objConnect = require('./configConnection');
 
-//diferente do createConnection o createPool pode manipular conexões simultâneas
-const pool = mysql.createPool(objConnect);
+const sequelize = new Sequelize(objConnect.database, objConnect.user, objConnect.password, {
+    dialect: 'mysql',
+    host: objConnect.host
+});
 
-module.exports = pool.promise();
+module.exports = sequelize;

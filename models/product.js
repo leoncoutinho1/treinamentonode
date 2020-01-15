@@ -1,33 +1,32 @@
+//necessário importar a classe para ter acesso aos tipos de atributos para relacionar na classe.
+const Sequelize = require('sequelize');
 
-const db = require('../utils/database');
-const Cart = require('./cart');
+//importando a instância já configurada
+const sequelize = require('../utils/database');
 
-module.exports = class Product {
-    constructor(id, title, price, imageUrl, description) {
-        this.id = id;
-        this.title = title;
-        this.price = price;
-        this.imageUrl = imageUrl;
-        this.description = description;
+const Product = sequelize.define('product', {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
+    },
+    title: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+    price: {
+        type: Sequelize.DOUBLE,
+        allowNull: true
+    },
+    description: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+    imageUrl: {
+        type: Sequelize.STRING,
+        allowNull: true
     }
+});
 
-    save() {
-        return db.execute(
-            'INSERT INTO products (title, price, description, imageUrl) VALUES (?, ?, ?, ?)', 
-            [this.title, this.price, this.description, this.imageUrl]
-        );
-    }
-
-    static deleteById(id) {
-        
-    }
-
-    static fetchAll() {
-        //the function execute return a promise, the handle will be in the controller of product
-        return db.execute('select * from products');
-    }
-
-    static findById(id) {
-        
-    }
-}
+module.exports = Product;
