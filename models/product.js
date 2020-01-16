@@ -1,30 +1,30 @@
-//necessário importar a classe para ter acesso aos tipos de atributos para relacionar na classe.
-const Sequelize = require('sequelize');
+//necessário importar o construtor para ter acesso aos tipos de atributos para relacionar na classe.
+const DataTypes = require('sequelize');
 
 //importando a instância já configurada
 const sequelize = require('../utils/database');
 
 const Product = sequelize.define('product', {
     id: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
     title: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: true
     },
     price: {
-        type: Sequelize.DOUBLE,
+        type: DataTypes.DOUBLE,
         allowNull: true
     },
     description: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: true
     },
     imageUrl: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: true
     }
 });

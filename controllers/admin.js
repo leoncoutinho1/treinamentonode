@@ -62,11 +62,15 @@ exports.postAddProduct = (req, res, next) => {
     const price = req.body.price;
     const imageUrl = req.body.imageUrl;
     const description = req.body.description;
-    const product = new Product(null, title, price, imageUrl, description);   //recupera os dados digitados no form pelo body da request
-    product
-        .save()
-        .then(res.redirect('/'))
-        .catch(err => console.log(err));    
+    Product
+        .create({
+            title: title,
+            price: price,
+            description: description,
+            imageUrl: imageUrl
+        })
+        .then()
+        .catch();
 };
 
 exports.postEditProduct = (req, res, next) => {
