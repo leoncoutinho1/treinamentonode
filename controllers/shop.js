@@ -2,26 +2,26 @@ const Product = require('../models/product');
 const Cart = require('../models/cart');
 
 exports.getProducts = (req, res, next) => {
-    Product.fetchAll()
-        .then(([rows, fieldData]) => {
-            res.render(
-                'shop/product-list', 
-                { 
-                    prods: rows,
-                    pageTitle: 'All Products', 
-                    path: '/products' 
-                });
-        })
-        .catch(err => console.log(err));    
+    Product
+        .findAll()
+        .then(products => res.render(
+            'shop/product-list', 
+            { 
+                prods: products,
+                pageTitle: 'All Products', 
+                path: '/products' 
+            })
+        )
+        .catch(err => console.log(err));
 };
 
 exports.getProduct = (req, res, next) => {
     const prodId = req.params.productId;
     Product
-        .findById(prodId)
-        .then(([product]) => {
+        .findByPk(prodId)
+        .then((product) => {
             res.render('shop/product-detail', {
-                product: product[0],
+                product: product,
                 pageTitle: product.title,
                 path: 'shop/products'
             })
@@ -30,16 +30,18 @@ exports.getProduct = (req, res, next) => {
 };
 
 exports.getIndex = (req, res, next) => {
-    Product.fetchAll()
-        .then(([rows, fieldData]) => {
-            res.render(
+    //pode ser passado um objeto com opções como parametro de findAll
+    //por exemplo a clausula where
+    Product
+        .findAll()
+        .then(products => res.render(
                 'shop/index', 
                 { 
-                    prods: rows,
+                    prods: products,
                     pageTitle: 'Shop', 
                     path: '/' 
-                });
-        })
+                }
+        ))
         .catch(err => console.log(err));
 };
 
