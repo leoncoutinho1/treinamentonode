@@ -2,6 +2,7 @@ const Product = require('../models/product');
 const Cart = require('../models/cart');
 
 exports.getProducts = (req, res, next) => {
+    // @ts-ignore
     Product
         .findAll()
         .then(products => res.render(
@@ -17,6 +18,7 @@ exports.getProducts = (req, res, next) => {
 
 exports.getProduct = (req, res, next) => {
     const prodId = req.params.productId;
+    // @ts-ignore
     Product
         .findByPk(prodId)
         .then((product) => {

@@ -40,9 +40,13 @@ exports.getEditProduct = (req,res,next) => {
     }
 
     const productId = req.params.productId;
-    Product
-        .findByPk(productId)
-        .then(product => {
+    req.user
+        .getProducts({ where: {id: productId} })
+        .then(products => {
+            const product = products[0];
+            if (!product) {
+                return res.redirect('/');
+            }
             res.render(
                 'admin/edit-product',
                 {
@@ -63,9 +67,10 @@ exports.postAddProduct = (req, res, next) => {
     const price = req.body.price;
     const imageUrl = req.body.imageUrl;
     const description = req.body.description;
-    Product
-        .create({
-            title: title,
+    
+    //método gerado pelo sequelize após associar o produto ao usuário
+    req.user.createProduct({
+        title: title,
             price: price,
             imageUrl: imageUrl,
             description: description
@@ -118,8 +123,8 @@ exports.postDeleteProduct = (req, res, next) => {
 }
 
 exports.getProducts = (req, res, next) => {
-    Product
-        .findAll()
+    req.user
+        .getProducts()
         .then(products => {
             res.render('admin/products', {
                 prods: products,

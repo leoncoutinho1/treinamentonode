@@ -9,9 +9,22 @@ const bodyParser = require('body-parser');
 //const expressHbs = require('express-handlebars');
 
 const sequelize = require('./utils/database');
+const Product = require('./models/product');
+const User = require('./models/user');
 
 app.use(bodyParser.urlencoded({ extended: false }));  //{ extended: false } funcionou sem mas apresentou uma mensagem de body-parser deprecated
 app.use(express.static(path.join(__dirname, 'public'))); //liberando acesso à pasta public
+
+//middleware que recupera o usuário logado
+app.use((req,res,next) => {
+    User
+        .findByPk(1)
+        .then(user => {
+            req.user = user;
+            next();
+        })
+        .catch(err => console.log(err));
+});
 
 //habilitando para ejs
 app.set('view engine', 'ejs');
@@ -41,11 +54,25 @@ app.use(pageRoutes);
 app.use(productRoutes);
 app.use(notFoundRoutes);
 
+Product.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
+User.hasMany(Product);
+
 //sincroniza o sequelize e se tiver sucesso inicia o server
 sequelize
+//    .sync({ force: true })
     .sync()
     .then(result => {
+        return User.findByPk(1);
         //console.log(result);
+    })
+    .then(user => {
+        if (!user) {
+            User.create({ name: "Max", email: "teste@teste.com"});
+        }
+        return user;
+    })
+    .then(user => {
+        //console.log(user);
         app.listen(3000, () => {
             console.log('Escutando em localhost:3000');
         });
