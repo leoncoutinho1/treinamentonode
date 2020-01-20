@@ -161,6 +161,10 @@ img {
     padding: 0 0.5rem;
   }
   
+  .cart-list {
+    list-style-type: none;
+  }
+
   .btn {
     font: inherit;
     border: 1px solid #00695c;

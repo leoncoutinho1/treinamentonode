@@ -11,6 +11,8 @@ const bodyParser = require('body-parser');
 const sequelize = require('./utils/database');
 const Product = require('./models/product');
 const User = require('./models/user');
+const Cart = require('./models/cart');
+const CartItem = require('./models/cart-item');
 
 app.use(bodyParser.urlencoded({ extended: false }));  //{ extended: false } funcionou sem mas apresentou uma mensagem de body-parser deprecated
 app.use(express.static(path.join(__dirname, 'public'))); //liberando acesso à pasta public
@@ -56,6 +58,11 @@ app.use(notFoundRoutes);
 
 Product.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
 User.hasMany(Product);
+User.hasOne(Cart);
+Cart.belongsTo(User);
+Cart.belongsToMany(Product, { through: CartItem });
+Product.belongsToMany(Cart, { through: CartItem });
+
 
 //sincroniza o sequelize e se tiver sucesso inicia o server
 sequelize
@@ -73,6 +80,9 @@ sequelize
     })
     .then(user => {
         //console.log(user);
+        return user.createCart();
+    })
+    .then(cart => {
         app.listen(3000, () => {
             console.log('Escutando em localhost:3000');
         });
