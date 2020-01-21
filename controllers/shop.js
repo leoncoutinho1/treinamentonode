@@ -1,9 +1,10 @@
+const mongodb = require('mongodb');
 const Product = require('../models/product');
 
 exports.getProducts = (req, res, next) => {
     // @ts-ignore
     Product
-        .findAll()
+        .fetchAll()
         .then(products => res.render(
             'shop/product-list', 
             { 
@@ -17,14 +18,13 @@ exports.getProducts = (req, res, next) => {
 
 exports.getProduct = (req, res, next) => {
     const prodId = req.params.productId;
-    // @ts-ignore
     Product
-        .findByPk(prodId)
-        .then((product) => {
+        .findById(prodId)
+        .then(product => {
             res.render('shop/product-detail', {
                 product: product,
                 pageTitle: product.title,
-                path: 'shop/products'
+                path: '/products'
             })
         })
         .catch(err => console.log(err));
@@ -34,7 +34,7 @@ exports.getIndex = (req, res, next) => {
     //pode ser passado um objeto com opções como parametro de findAll
     //por exemplo a clausula where
     Product
-        .findAll()
+        .fetchAll()
         .then(products => res.render(
                 'shop/index', 
                 { 

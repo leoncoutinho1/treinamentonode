@@ -1,22 +1,31 @@
+const mongodb = require('mongodb');
+const MongoClient = mongodb.MongoClient;
 
-//declarado com letra maiuscula e chaves pq o sequelize importa um constructor
-const { Sequelize } = require('sequelize');
+let _db;
 
-//buscando do arquivo utils/configConnection o objeto que será passado para o createPool
-// objeto com o seguinte formato:
-/*  
-    {
-        host: '',
-        database: '',
-        user: '',
-        password: ''
+//recupera a string de conexão do mongodb
+const stringConn = require('./configConnection');
+
+const mongoConnect = (callback) => {
+    MongoClient
+        .connect(stringConn)
+        .then(client => {
+            console.log('Connected to mongodb atlas');
+            _db = client.db();  //pode ser passado como parâmetro o banco que será utilizado, como está ele vai utilizar o banco que consta na string de conexão
+            callback();
+        })
+        .catch(err => {
+            console.log(err);
+            throw err;
+        });
+}
+
+const getDb = () => {
+    if (_db) {
+        return _db;
     }
-*/
-const objConnect = require('./configConnection');
+    throw 'No database found';
+}
 
-const sequelize = new Sequelize(objConnect.database, objConnect.user, objConnect.password, {
-    dialect: 'mysql',
-    host: objConnect.host
-});
-
-module.exports = sequelize;
+exports.mongoConnect = mongoConnect;
+exports.getDb = getDb;

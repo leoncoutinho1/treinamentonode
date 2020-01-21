@@ -67,20 +67,18 @@ exports.postAddProduct = (req, res, next) => {
     const price = req.body.price;
     const imageUrl = req.body.imageUrl;
     const description = req.body.description;
-    
-    //método gerado pelo sequelize após associar o produto ao usuário
-    req.user.createProduct({
-        title: title,
-            price: price,
-            imageUrl: imageUrl,
-            description: description
-        })
+    const product = new Product(title, price, imageUrl, description);
+    product
+        .save()
         .then(result => {
-            console.log('Product created.');
-            res.redirect('/');
+            console.log('Create Product.');
+            res.redirect('/admin/products');
         })
-        .catch(err => console.log(err));
-};
+        .catch(err => {
+            console.log(err);
+        })
+
+}    
         
 
 exports.postEditProduct = (req, res, next) => {
@@ -123,8 +121,8 @@ exports.postDeleteProduct = (req, res, next) => {
 }
 
 exports.getProducts = (req, res, next) => {
-    req.user
-        .getProducts()
+    Product
+        .fetchAll()
         .then(products => {
             res.render('admin/products', {
                 prods: products,
