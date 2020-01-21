@@ -267,4 +267,10 @@ img {
     }
   }
 
+  @media (max-width: 768px) {
+    .main-header nav {
+      display: none;
+    }
+  }
+
   

@@ -3,7 +3,7 @@ const sideDrawer = document.querySelector('.mobile-nav');
 const menuToggle = document.querySelector('#side-menu-toggle');
 
 function backdropClickHandler() {
-  backdrop.style.display = 'none';
+  backdrop.style.diplay = 'none';
   sideDrawer.classList.remove('open');
 }
 
