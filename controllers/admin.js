@@ -11,15 +11,22 @@ exports.logHour = (req, res, next) => {
 
 exports.notFound = (req, res, next) => {
     res.status(404).render('admin/notFound', { pageTitle: 'Page Not Found', path: ''});
+};
 
-    //chamada da pagina estática
-    //res.status(404).sendFile(path.join(__dirname, 'views', 'notFound.html'));
+exports.getProducts = (req, res, next) => {
+    Product
+        .fetchAll()
+        .then(products => {
+            res.render('admin/products', {
+                prods: products,
+                pageTitle: 'Admin Products',
+                path: '/admin/products'
+            });
+        })
+        .catch(err => console.log(err));
 };
 
 exports.getAddProduct = (req,res,next) => {
-    //renderização com handlebars
-    //res.render('add-product', { pageTitle: 'Add Product', activeAddProduct: true});
-    //renderização com pug e ejs
     res.render(
         'admin/edit-product',
         {
@@ -28,8 +35,6 @@ exports.getAddProduct = (req,res,next) => {
             editing: false
         }
     );
-    // código para pagina estatica
-    //res.sendFile(path.join(__dirname, '../', 'views', 'add-product.html'));
 };
 
 exports.getEditProduct = (req,res,next) => {
@@ -40,10 +45,9 @@ exports.getEditProduct = (req,res,next) => {
     }
 
     const productId = req.params.productId;
-    req.user
-        .getProducts({ where: {id: productId} })
-        .then(products => {
-            const product = products[0];
+    Product
+        .findById(productId)
+        .then(product => {
             if (!product) {
                 return res.redirect('/');
             }
@@ -54,8 +58,8 @@ exports.getEditProduct = (req,res,next) => {
                     path:'/admin/edit-product',
                     editing: editMode,
                     product: product
-                })
-            })
+                });
+        })
         .catch(err => {
             console.log(err);
             return res.redirect('/');
@@ -87,48 +91,30 @@ exports.postEditProduct = (req, res, next) => {
     const updatedPrice = req.body.price;
     const updatedImageUrl = req.body.imageUrl;
     const updatedDescription = req.body.description;
-    Product
-        .findByPk(prodId)
-        .then(product => {
-            product.title = updatedTitle;
-            product.price = updatedPrice;
-            product.imageUrl = updatedImageUrl;
-            product.description = updatedDescription;
-            return product.save();
+    
+    const product = new Product(updatedTitle, 
+                                updatedPrice, 
+                                updatedImageUrl, 
+                                updatedDescription, 
+                                prodId);
+
+    product
+        .save()
+        .then(result => {
+            console.log('Updated product.');
+            res.redirect('/admin/products');
         })
-        .then(
-            result => {
-                console.log('Updated product.');
-                res.redirect('/admin/products');
-            }
-        ) //esse then é referente ao product.save que foi retornado
-        .catch(
-            err => console.log(err)); //esse catch vale tanto para o primeiro quanto pro segundo then
+        .catch(err => console.log(err));
 };
 
 exports.postDeleteProduct = (req, res, next) => {
     const prodId = req.body.productId;
     Product
-        .findByPk(prodId)
-        .then(product => {
-            return product.destroy();
-        })
-        .then(result => {
-            console.log('Destroyed product');
+        .deleteById(prodId)
+        .then(() => {
+            console.log('Removed product');
             res.redirect('/admin/products');
         })
         .catch(err => console.log(err));
 }
 
-exports.getProducts = (req, res, next) => {
-    Product
-        .fetchAll()
-        .then(products => {
-            res.render('admin/products', {
-                prods: products,
-                pageTitle: 'Admin Products',
-                path: '/admin/products'
-            });
-        })
-        .catch(err => console.log(err));
-};
