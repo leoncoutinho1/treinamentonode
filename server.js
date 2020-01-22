@@ -10,6 +10,17 @@ const bodyParser = require('body-parser');
 
 const User = require('./models/user');
 
+//middleware que recupera o usuário logado
+app.use((req,res,next) => {
+    User
+        .findById('5e279a0b3128dd0e1efbd3a3')
+        .then(user => {
+            req.user = new User(user.name, user.email, user.cart, user._id);
+            next();
+        })
+        .catch(err => console.log(err));
+});
+
 app.use(bodyParser.urlencoded({ extended: false }));  //{ extended: false } funcionou sem mas apresentou uma mensagem de body-parser deprecated
 app.use(express.static(path.join(__dirname, 'public'))); //liberando acesso à pasta public
 
@@ -17,19 +28,6 @@ app.use(express.static(path.join(__dirname, 'public'))); //liberando acesso à p
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const notFoundRoutes = require('./routes/notFound'); 
-
-//middleware que recupera o usuário logado
-app.use((req,res,next) => {
-    User
-        .findById('5e279a0b3128dd0e1efbd3a3')
-        .then(user => {
-            req.user = user;
-            console.log(req.user);
-            next();
-        })
-        .catch(err => console.log(err));
-    next();
-});
 
 app.use(adminRoutes);
 app.use(shopRoutes);
