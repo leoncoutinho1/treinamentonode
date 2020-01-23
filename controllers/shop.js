@@ -3,7 +3,7 @@ const Product = require('../models/product');
 
 exports.getProducts = (req, res, next) => {
     Product
-        .fetchAll()
+        .find()                     // provide by mongoose
         .then(products => res.render(
             'shop/product-list', 
             { 
@@ -18,7 +18,7 @@ exports.getProducts = (req, res, next) => {
 exports.getProduct = (req, res, next) => {
     const prodId = req.params.productId;
     Product
-        .findById(prodId)
+        .findById(prodId)               //provide by mongoose, it converts id from string to objectId 
         .then(product => {
             res.render('shop/product-detail', {
                 product: product,
@@ -30,10 +30,8 @@ exports.getProduct = (req, res, next) => {
 };
 
 exports.getIndex = (req, res, next) => {
-    //pode ser passado um objeto com opções como parametro de findAll
-    //por exemplo a clausula where
     Product
-        .fetchAll()
+        .find()                     // provide by mongoose
         .then(products => res.render(
                 'shop/index', 
                 { 
@@ -48,7 +46,12 @@ exports.getIndex = (req, res, next) => {
 
 exports.getCart = (req, res, next) => {
     req.user
-        .getCart()
+        .populate('cart.items.productId')   //populate temporarily the products in place of productId.
+        .execPopulate()                     //populate works because productId in user model was set as ref: 'Product'
+        .then(user => {
+            const products = user.cart.items;   //populate list items inside productId, modifications was made in cart.ejs
+            return products;
+        })
         .then(products => {
             res.render('shop/cart', 
                 { 

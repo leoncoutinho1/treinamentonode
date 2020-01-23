@@ -1,3 +1,1 @@
-# Projeto de uma loja with Node.js, MySQL(Sequelize) e MongoDB.
-
-## Este projeto estou fazendo acompanhando um curso, o autor utilizou a mesma estrutura para ensinar várias formas de persistência de dados (FS (em arquivos JSON), MySQL puro, Sequelize, MongoDB). Além disso explicou as bases do padrão MVC, a utilização de rotas com Express, a criação de Views dinâmicas utilizando PUG, handlebars e EJS.
+#### Estou fazendo este projeto acompanhando um curso, o autor utilizou a mesma estrutura para ensinar várias formas de persistência de dados (FS (em arquivos JSON), MySQL puro, Sequelize, MongoDB puro, Mongoose). Além disso explicou as bases do padrão MVC, a utilização de rotas com Express, a criação de Views dinâmicas utilizando PUG, Handlebars e EJS.
