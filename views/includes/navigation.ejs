@@ -9,20 +9,42 @@
             <li class="item-list">
                 <a class="<%= path === '/products' ? 'active' : '' %>" href="/products">Products</a>
             </li>
-            <li class="item-list">
-                <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
-            </li>
-            <li class="item-list">
-                <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
-            </li>
-            <li class="item-list">
-                <a class="<%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product">Add Product
-                </a>
-            </li>
-            <li class="item-list">
-                <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products
-                </a>
-            </li>
+
+            <% if (isLoggedIn) { %>
+
+                <li class="item-list">
+                    <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
+                </li>
+                <li class="item-list">
+                    <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
+                </li>
+                <li class="item-list">
+                    <a class="<%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product">Add Product
+                    </a>
+                </li>
+                <li class="item-list">
+                    <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products
+                    </a>
+                </li>
+
+            <% } %>
+        </ul>
+        <ul class="list">
+            <% if (isLoggedIn) { %>
+                <li class="item-list">
+                    <a href="/logout">Sair</a>
+                </li>
+                
+            <% } else { %>
+                               
+                <li class="item-list">
+                    <a class="<%= path === '/login' ? 'active' : '' %>" href="/login">Login</a>
+                </li>
+                <li class="item-list">
+                    <a class="<%= path === '/signup' ? 'active' : '' %>" href="/signUp">Sign Up</a>
+                </li>
+                
+            <% } %>
         </ul>
     </nav>
 </header>
@@ -35,19 +57,37 @@
                 <li class="mobile-nav__item">
                     <a class="<%= path === '/products' ? 'active' : '' %>" href="/products">Products</a>
                 </li>
-                <li class="mobile-nav__item">
-                    <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
-                </li>
-                <li class="mobile-nav__item">
-                    <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
-                </li>
-                <li class="mobile-nav__item">
-                    <a class="<%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product">Add Product
-                    </a>
-                </li>
-                <li class="mobile-nav__item">
-                    <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products
-                    </a>
-                </li>
+                <% if (isLoggedIn) { %>
+                    <li class="mobile-nav__item">
+                        <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
+                    </li>
+                    <li class="mobile-nav__item">
+                        <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
+                    </li>
+                    <li class="mobile-nav__item">
+                        <a class="<%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product">Add Product
+                        </a>
+                    </li>
+                    <li class="mobile-nav__item">
+                        <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products
+                        </a>
+                    </li>
+                <% } %>
             </ul>
+            <% if (isLoggedIn) { %>
+                <ul class="mobile-nav__item-list">
+                    <li class="mobile-nav__item">
+                        <a href="/logout">Logout</a>
+                    </li>
+                </ul>
+            <% } else { %>
+                <ul class="mobile-nav__item-list">
+                    <li class="mobile-nav__item">
+                        <a href="/login">Login</a>
+                    </li>
+                    <li class="mobile-nav__item">
+                        <a href="/signUp">Sign Up</a>
+                    </li>
+                </ul>
+            <% } %>
 </nav>

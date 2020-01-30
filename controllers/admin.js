@@ -10,7 +10,13 @@ exports.logHour = (req, res, next) => {
 };
 
 exports.notFound = (req, res, next) => {
-    res.status(404).render('admin/notFound', { pageTitle: 'Page Not Found', path: ''});
+    res
+        .status(404)
+        .render('admin/notFound', {
+            pageTitle: 'Page Not Found', 
+            path: '',
+            isLoggedIn: req.session.isLoggedIn
+        });
 };
 
 exports.getProducts = (req, res, next) => {
@@ -20,7 +26,8 @@ exports.getProducts = (req, res, next) => {
             res.render('admin/products', {
                 prods: products,
                 pageTitle: 'Admin Products',
-                path: '/admin/products'
+                path: '/admin/products',
+                isLoggedIn: req.session.isLoggedIn                          
             });
         })
         .catch(err => console.log(err));
@@ -32,7 +39,8 @@ exports.getAddProduct = (req,res,next) => {
         {
             pageTitle: 'Add Product', 
             path:'/admin/add-product',
-            editing: false
+            editing: false,
+            isLoggedIn: req.session.isLoggedIn            
         }
     );
 };
@@ -57,7 +65,8 @@ exports.getEditProduct = (req,res,next) => {
                     pageTitle: 'Edit Product', 
                     path:'/admin/edit-product',
                     editing: editMode,
-                    product: product
+                    product: product,
+                    isLoggedIn: req.session.isLoggedIn                    
                 });
         })
         .catch(err => {
@@ -71,12 +80,13 @@ exports.postAddProduct = (req, res, next) => {
     const price = req.body.price;
     const imageUrl = req.body.imageUrl;
     const description = req.body.description;
+    
     const product = new Product({
         title: title, 
         price: price, 
         imageUrl: imageUrl, 
         description: description, 
-        userId: req.user        //mongoose automaticaly takes _id from user
+        userId: req.user      //mongoose automaticaly takes _id from user
     });
     product
         .save()             //provide by mongoose

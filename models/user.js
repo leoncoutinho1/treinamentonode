@@ -11,19 +11,22 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    password: {
+        type: String,
+        required: false
+    },
     cart: {
-        items: [{ 
+        items: [
+          {
             productId: {
-                type: Schema.Types.ObjectId,
-                ref: 'Product',
-                required: true
+              type: Schema.Types.ObjectId,
+              ref: 'Product',
+              required: true
             },
-            quantity: {
-                type: Number,
-                required: true
-            }
-        }]
-    }
+            quantity: { type: Number, required: true }
+          }
+        ]
+      }
 });
 
 userSchema.methods.addToCart = function(product) {
@@ -72,13 +75,10 @@ userSchema.methods.clearCart = function() {
     return this.save();
 }
 
-
-userSchema.methods.getOrders = function() {
-            
-//              .find({ 'user._id': new ObjectId(this._id) }).
-//              toArray();
+userSchema.methods.setVisitor = function() {
+    if (!this.name) {
+        this.name = 'Visitante';
+    }
 }
-
-
 
 module.exports = mongoose.model('User', userSchema);

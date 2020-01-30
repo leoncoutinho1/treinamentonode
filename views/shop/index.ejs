@@ -18,7 +18,9 @@
                                 <p class="product-description"><%= product.description %></p>
                             </div>
                             <div class="card-actions">
-                                <%- include('../includes/add-to-cart.ejs', {product: product}) %>
+                                <% if (isLoggedIn) { %>
+                                    <%- include('../includes/add-to-cart.ejs', {product: product}) %>
+                                <% } %>
                             </div>
                         </article>
                     <% } %>
