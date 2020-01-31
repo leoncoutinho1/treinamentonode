@@ -3,10 +3,17 @@ const bcrypt = require('bcryptjs');
 
 
 exports.getLogin = (req, res, next) => {
+    let message = req.flash('error');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
     res.render('auth/login', {
         path: '/login',
         pageTitle: 'Login',
-        isLoggedIn: req.session.isLoggedIn
+        isLoggedIn: req.session.isLoggedIn,
+        errorMessage: message
     });
 }
 
@@ -19,9 +26,9 @@ exports.postLogin = (req, res, next) => {
         })
         .then(user => {
             if (!user) {
+                req.flash('error', 'Invalid e-mail or password.');
                 return res.redirect('/login');
             }
-            console.log(user);
             bcrypt
                 .compare(password, user.password)
                 .then(doMatch => {
@@ -33,15 +40,13 @@ exports.postLogin = (req, res, next) => {
                             res.redirect('/');
                         });
                     }
+                    req.flash('error', 'Invalid e-mail or password.');
                     res.redirect('/login')
                 })
                 .catch(err => {
                     console.log(err);
                     res.redirect('/login');
                 })
-                
-
-            
         })
         .catch(err => {
             req.session.isLoggedIn = false;
@@ -56,10 +61,16 @@ exports.getLogout = (req, res, next) => {
 }
 
 exports.getSignUp = (req, res, next) => {
+    let message = req.flash('error');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
     res.render('auth/signUp', {
         path: '/signup',
         pageTitle: 'Sign Up',
-        isLoggedIn: req.session.isLoggedIn
+        errorMessage: message
     });
 }
 
@@ -70,6 +81,7 @@ exports.postSignUp = (req, res, next) => {
         .findOne({ email: email })
         .then(userDoc => {
             if (userDoc) {
+                req.flash('error', 'E-mail already exists, please pick a different one');
                 return res.redirect('/signup');
             }
             return bcrypt

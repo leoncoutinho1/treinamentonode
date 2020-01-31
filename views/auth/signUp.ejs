@@ -3,6 +3,11 @@
 <body>
 <%- include('../includes/navigation.ejs') %>
 <main>
+    <% if (errorMessage) { %>
+        <div class="user-message user-message--error">
+            <%= errorMessage %>
+        </div>      
+    <% } %>
     <div class="form">
         <form class="signup-form" action="/signUp" method="POST">
             <div class="form-control">
@@ -17,6 +22,7 @@
                 <label for="confirmpassword">Confirm password</label>
                 <input type="password" name="confirmpassword" id="confirmpassword"/>
             </div>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <button class="btn" type="submit">Sign Up</button>
         </form>
     </div>

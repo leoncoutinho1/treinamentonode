@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const urlMongoDb = require('./utils/configConnection');
 const csrf = require('csurf');
 const csrfProtection = csrf();
+const flash = require('connect-flash');
 
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
@@ -33,6 +34,8 @@ app.use(
 );
 
 app.use(csrfProtection);
+app.use(flash());
+
 
 //importando rotas
 const adminRoutes = require('./routes/admin');
@@ -55,6 +58,7 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
     res.locals.isLoggedIn = req.session.isLoggedIn;
     res.locals.csrfToken = req.csrfToken();
+    next();
 })
 
 app.use(adminRoutes);

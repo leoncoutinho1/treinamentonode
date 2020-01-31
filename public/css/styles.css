@@ -343,3 +343,19 @@ img {
   .login-form button, .signup-form button {
     width: 35%;
   }
+
+  .user-message {
+    margin: auto;
+    width: 90%;
+    border: 1px solid #4771fa;
+    padding: 1rem;
+    border-radius: 3px;
+    background: #b9c9ff;
+    text-align: center;
+  }
+  
+  .user-message--error {
+    border: 1px solid red;
+    background: rgb(255, 176, 176);
+    color: red;
+  }
