@@ -1,1 +1,18 @@
-#### Estou fazendo este projeto acompanhando um curso, o autor utilizou a mesma estrutura para ensinar várias formas de persistência de dados (FS (em arquivos JSON), MySQL puro, Sequelize, MongoDB puro, Mongoose). Além disso explicou as bases do padrão MVC, a utilização de rotas com Express, a criação de Views dinâmicas utilizando PUG, Handlebars e EJS.
+#### Estou fazendo este projeto acompanhando um curso. Durante o curso foram trabalhadas os seguintes tópicos:
+- **Padrão MVC**;
+- **Node.js**;
+- **Pacote Express para criar um servidor e prover rotas**;
+- **Persistência de dados**
+    - Foram utilizadas as seguintes formas:
+        - Filesystem com o pacote FS onde os dados foram gravados em arquivos JSON,
+        - MySQL puro,
+        - ORM Sequelize,
+        - MongoDB puro,
+        - ODM Mongoose.
+- **Views dinâmicas**
+    - PUG,
+    - Handlebars e 
+    - EJS.
+- **Criptografia de senhas com bcrypt**
+- **Transmissão de dados entre requests com flash**
+- **Proteção de views com csrfProtection**
