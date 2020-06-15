@@ -1,16 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const urlMongoDb = require('./utils/configConnection');
 const csrf = require('csurf');
 const csrfProtection = csrf();
 const flash = require('connect-flash');
+require('dotenv').config();
 
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const app = express();
 
 const store = new MongoDBStore({
-    uri: urlMongoDb,
+    uri: process.env.MONGO_URL,
     collection: 'sessions'
 });
 
@@ -70,7 +70,7 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 mongoose
-  .connect(urlMongoDb, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(result => {
     app.listen(3000, () => {
         console.log('Escutando em localhost:3000');

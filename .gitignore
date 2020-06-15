@@ -1,6 +1,9 @@
 # arquivo com configurações de conexão ao bd
 utils/configConnection.js
 utils/configSendGrid.js
+package-lock.json
+.env
+
 # Logs
 logs
 *.log
